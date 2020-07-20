@@ -11,7 +11,7 @@ deleteDir()
         stage ('Execute Terraform Template') {
         sh '/usr/local/bin/terraform.12.26 init'
         sh '/usr/local/bin/terraform.12.26 providers'
-        sh '/usr/local/bin/terraform.12.26 import nsxt_firewall_section.defaultlayer3sect ffffffff-8a04-4924-a5b4-54d30e81befe'
+        sh '/usr/local/bin/terraform.12.26 import -var nsxUser="$NSXUSERNAME" -var nsxpassword="$NSXPASSWORD" nsxt_firewall_section.defaultlayer3sect ffffffff-8a04-4924-a5b4-54d30e81befe'
         sh '/usr/local/bin/terraform.12.26 apply -var nsxip="172.25.0.202" -var nsxUser="$NSXUSERNAME" -var nsxpassword="$NSXPASSWORD"'
         }
     }
