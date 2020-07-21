@@ -53,7 +53,7 @@ resource "nsxt_policy_group" "SharedServices" {
 }
 
 resource "nsxt_policy_group" "ProtectedAssets" {
-  display_name = "Shared Services"
+  display_name = "Protected Assets"
   description  = "Protected Assets Group provisioned by Terraform"
   criteria {
     ipaddress_expression {
