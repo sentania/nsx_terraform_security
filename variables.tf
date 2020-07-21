@@ -1,3 +1,3 @@
 variable "nsxIP" {}
 variable "nsxUser" {}
-variable "nsxpassword" {}
+variable "nsxPassword" {}
