@@ -81,9 +81,9 @@ resource "nsxt_policy_group" "PrivateIPs" {
   }
 }
 
-resource "nsxt_policy_security_policy" "PrivateCloudGaurdrailWhitelist" {
-  description  = "Private Cloud Whitelist Section provisioned by Terraform"
-  display_name = "Private Cloud Whitelist"
+resource "nsxt_policy_security_policy" "PrivateCloudGaurdrail" {
+  description  = "Private Cloud Gaurdrails Section provisioned by Terraform"
+  display_name = "Private Cloud Gaurdrails"
   category = "Environment"
   rule {
     display_name = "Allow Shared Services"
