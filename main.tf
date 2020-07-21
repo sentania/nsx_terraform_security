@@ -33,7 +33,7 @@ resource "nsxt_policy_group" "ProdNonPCI" {
 }
 
 resource "nsxt_policy_group" "PrivateCloud" {
-  display_name = "Private Cloud"
+  display_name = "Private Cloud 2.0"
   description  = "Private Cloud Group provisioned by Terraform"
   criteria {
     path_expression {
