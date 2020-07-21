@@ -134,7 +134,7 @@ resource "nsxt_policy_security_policy" "PrivateCloudGaurdrailWhitelist" {
 resource "nsxt_policy_security_policy" "PrivateCloudGaurdrailBlackist" {
   description  = "Private Cloud Default Section provisioned by Terraform"
   display_name = "Private Cloud Default Deny"
-  category = "Applicaiton"
+  category = "Application"
   sequence_number = 59999
   rule {
     display_name = "Default Deny (Reject)"
