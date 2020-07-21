@@ -131,31 +131,17 @@ resource "nsxt_policy_security_policy" "PrivateCloudGaurdrailWhitelist" {
   }
 }
 
-resource "nsxt_firewall_section" "defaultlayer3sect" {
-  section_type = "LAYER3"
-  stateful     = true 
-}
-
-
-resource "nsxt_firewall_section" "PrivateCloudGaurdrailBlackist" {
+resource "nsxt_policy_security_policy" "PrivateCloudGaurdrailBlackist" {
   description  = "Private Cloud Default Section provisioned by Terraform"
   display_name = "Private Cloud Default Deny"
-  section_type = "LAYER3"
-  insert_before = "${nsxt_firewall_section.defaultlayer3sect.id}"
-  stateful     = true
-   applied_to {
-    target_type = "NSGroup"
-    target_id   = nsxt_ns_group.PrivateCloud.id
-  }
-    rule {
+  category = "Applicaiton"
+  sequence_number = 59999
+  rule {
     display_name = "Default Deny (Reject)"
     description  = ""
     action       = "REJECT"
-    logged       = false
-    ip_protocol  = "IPV4"
-    destination {
-      target_type = "NSGroup"
-      target_id   = nsxt_ns_group.PrivateCloud.id
-    }
+    ip_version  = "IPV4"
+    destination_groups =  [nsxt_policy_group.PrivateCloud.path]
   }
 }
+
