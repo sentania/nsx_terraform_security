@@ -83,8 +83,8 @@ resource "nsxt_policy_group" "PrivateIPs" {
 }
 
 resource "nsxt_policy_security_policy" "PrivateCloudGaurdrail" {
-  description  = "Private Cloud Gaurdrails Section provisioned by Terraform"
-  display_name = "Private Cloud Gaurdrails"
+  description  = "Private Cloud Guardrails Section provisioned by Terraform"
+  display_name = "Private Cloud Guardrails"
   category = "Environment"
   rule {
     display_name = "Allow Shared Services"
