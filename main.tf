@@ -132,7 +132,7 @@ resource "nsxt_policy_security_policy" "PrivateCloudGaurdrail" {
   }
 }
 
-resource "nsxt_policy_security_policy" "PrivateCloudGaurdrailBlackist" {
+resource "nsxt_policy_security_policy" "PrivateCloudGaurdrailDenyList" {
   description  = "Private Cloud Default Section provisioned by Terraform"
   display_name = "Private Cloud Default Deny"
   category = "Application"
