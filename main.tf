@@ -47,7 +47,7 @@ resource "nsxt_policy_group" "SharedServices" {
   description  = "Shared Services Group provisioned by Terraform"
   criteria {
     ipaddress_expression {
-      ip_addresses = ["10.100.0.142","10.100.0.5"]
+      ip_addresses = ["10.100.0.142","10.100.0.5","10.100.100.30","10.100.0.136"]
     }
   }
 }
