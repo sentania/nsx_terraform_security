@@ -6,7 +6,7 @@ provider "nsxt" {
     allow_unverified_ssl = true
 }
 
-
+#comment
 resource "nsxt_policy_group" "Sandbox" {
   display_name = "Sandbox"
   description  = "Sandbox Group provisioned by Terraform"
