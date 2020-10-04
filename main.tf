@@ -6,7 +6,7 @@ provider "nsxt" {
     allow_unverified_ssl = true
 }
 
-#comment
+
 resource "nsxt_policy_group" "Sandbox" {
   display_name = "Sandbox"
   description  = "Sandbox Group provisioned by Terraform"
@@ -27,9 +27,9 @@ resource "nsxt_policy_group" "ProdPCI" {
   description  = "Prod PCI Group provisioned by Terraform"
 
 }
-resource "nsxt_policy_group" "ProdNonPCI" {
-  display_name = "Prod Non-PCI"
-  description  = "Prod Non-PCI NSGroup provisioned by Terraform"
+#resource "nsxt_policy_group" "ProdNonPCI" {
+#  display_name = "Prod Non-PCI"
+##  description  = "Prod Non-PCI NSGroup provisioned by Terraform"
 }
 
 resource "nsxt_policy_group" "PrivateCloud" {
@@ -37,7 +37,7 @@ resource "nsxt_policy_group" "PrivateCloud" {
   description  = "Private Cloud Group provisioned by Terraform"
   criteria {
     path_expression {
-      member_paths = [nsxt_policy_group.Sandbox.path,nsxt_policy_group.ProdPCI.path,nsxt_policy_group.ProdNonPCI.path, nsxt_policy_group.TestPCI.path, nsxt_policy_group.TestNonPCI.path ]
+      member_paths = [nsxt_policy_group.Sandbox.path,nsxt_policy_group.ProdPCI.path,nsxt_policy_group.TestPCI.path, nsxt_policy_group.TestNonPCI.path ]
     }
   }
 }
