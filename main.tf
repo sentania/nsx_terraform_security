@@ -27,17 +27,17 @@ resource "nsxt_policy_group" "ProdPCI" {
   description  = "Prod PCI Group provisioned by Terraform"
 
 }
-#resource "nsxt_policy_group" "ProdNonPCI" {
-#  display_name = "Prod Non-PCI"
-##  description  = "Prod Non-PCI NSGroup provisioned by Terraform"
-#}
+resource "nsxt_policy_group" "ProdNonPCI" {
+  display_name = "Prod Non-PCI"
+  description  = "Prod Non-PCI NSGroup provisioned by Terraform"
+}
 
 resource "nsxt_policy_group" "PrivateCloud" {
   display_name = "Private Cloud 2.0"
   description  = "Private Cloud Group provisioned by Terraform"
   criteria {
     path_expression {
-      member_paths = [nsxt_policy_group.Sandbox.path,nsxt_policy_group.ProdPCI.path,nsxt_policy_group.TestPCI.path, nsxt_policy_group.TestNonPCI.path ]
+      member_paths = [nsxt_policy_group.Sandbox.path,nsxt_policy_group.ProdPCI.path,nsxt_policy_group.ProdNonPCI.path, nsxt_policy_group.TestPCI.path, nsxt_policy_group.TestNonPCI.path ]
     }
   }
 }
@@ -47,7 +47,7 @@ resource "nsxt_policy_group" "SharedServices" {
   description  = "Shared Services Group provisioned by Terraform"
   criteria {
     ipaddress_expression {
-      ip_addresses = ["10.100.0.142","10.100.0.5","10.100.100.30","10.100.0.136"]
+      ip_addresses = ["10.100.0.142","10.100.0.5"]
     }
   }
 }
@@ -58,26 +58,6 @@ resource "nsxt_policy_group" "ProtectedAssets" {
   criteria {
     ipaddress_expression {
       ip_addresses = ["10.100.65.0/24"]
-    }
-  }
-}
-
-resource "nsxt_policy_group" "InternetCIDR" {
-  display_name = "Internet"
-  description  = "Internet Group provisioned by Terraform"
-  criteria {
-    ipaddress_expression {
-      ip_addresses = ["1.0.0.0/8","3.0.0.0/8","4.0.0.0/6", "8.0.0.0/7", "11.0.0.0/8", "11.0.0.0/8", "12.0.0.0/6", "16.0.0.0/4", "32.0.0.0/3", "64.0.0.0/2", "128.0.0.0/3", "160.0.0.0/5", "168.0.0.0/6", "172.0.0.0/12", "172.32.0.0/11", "172.64.0.0/10", "172.128.0.0/9", "173.0.0.0/8", "174.0.0.0/7", "176.0.0.0/4", "192.0.0.0/9", "192.128.0.0/11", "192.160.0.0/13", "192.169.0.0/16", "192.170.0.0/15", "192.172.0.0/14", "192.176.0.0/12", "192.192.0.0/10", "193.0.0.0/8", "194.0.0.0/7", "196.0.0.0/6", "200.0.0.0/5", "208.0.0.0/4"]
-    }
-  }
-}
-
-resource "nsxt_policy_group" "PrivateIPs" {
-  display_name = "Private IPs"
-  description  = "Private IPs Group provisioned by Terraform"
-  criteria {
-    ipaddress_expression {
-      ip_addresses = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
     }
   }
 }
