@@ -30,7 +30,7 @@ resource "nsxt_policy_group" "ProdPCI" {
 #resource "nsxt_policy_group" "ProdNonPCI" {
 #  display_name = "Prod Non-PCI"
 ##  description  = "Prod Non-PCI NSGroup provisioned by Terraform"
-}
+#}
 
 resource "nsxt_policy_group" "PrivateCloud" {
   display_name = "Private Cloud 2.0"
