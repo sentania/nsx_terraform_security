@@ -9,26 +9,87 @@ provider "nsxt" {
 resource "nsxt_policy_group" "Sandbox" {
   display_name = "Sandbox"
   description  = "Sandbox Group provisioned by Terraform"
+  criteria {
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "sandbox|Environment"
+      }
+    }
 }
 
 resource "nsxt_policy_group" "TestPCI" {
   display_name = "Test PCI"
   description  = "Test PCI Group provisioned by Terraform"
-
+  criteria {
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "test|Environment"
+      }
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "PCI|Compliance"
+      }
+    }
 }
 resource "nsxt_policy_group" "TestNonPCI" {
   display_name = "Test Non-PCI"
   description  = "Test Non-PCI Group provisioned by Terraform"
-
+    criteria {
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "test|Environment"
+      }
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "NonPCI|Compliance"
+      }
+    }
 }
 resource "nsxt_policy_group" "ProdPCI" {
   display_name = "Prod PCI"
   description  = "Prod PCI Group provisioned by Terraform"
-
+  criteria {
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "Prod|Environment"
+      }
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "PCI|Compliance"
+      }
+    }
 }
 resource "nsxt_policy_group" "ProdNonPCI" {
   display_name = "Prod Non-PCI"
   description  = "Prod Non-PCI NSGroup provisioned by Terraform"
+    criteria {
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "Prod|Environment"
+      }
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "NonPCI|Compliance"
+      }
+    }
 }
 
 resource "nsxt_policy_group" "PrivateCloud" {
