@@ -122,7 +122,7 @@ resource "nsxt_policy_group" "ProtectedAssets" {
   }
 }
 
-resource "nsxt_policy_security_policy" "PrivateCloudGaurdrail" {
+resource "nsxt_policy_security_policy" "PrivateCloudGuardrail" {
   description  = "Private Cloud Guardrails Section provisioned by Terraform"
   display_name = "Private Cloud Guardrails"
   category = "Environment"
@@ -172,7 +172,7 @@ resource "nsxt_policy_security_policy" "PrivateCloudGaurdrail" {
   }
 }
 
-resource "nsxt_policy_security_policy" "PrivateCloudGaurdrailDenyList" {
+resource "nsxt_policy_security_policy" "PrivateCloudGuardrailDenyList" {
   description  = "Private Cloud Default Section provisioned by Terraform"
   display_name = "Private Cloud Default Deny"
   category = "Application"
