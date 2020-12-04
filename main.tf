@@ -33,7 +33,7 @@ resource "nsxt_policy_group" "TestPCI" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "PCI|Compliance"
+          value       = "pci|compliance"
       }
     }
 }
@@ -51,7 +51,7 @@ resource "nsxt_policy_group" "TestNonPCI" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "NonPCI|Compliance"
+          value       = "nonpci|compliance"
       }
     }
 }
@@ -69,7 +69,7 @@ resource "nsxt_policy_group" "ProdPCI" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "PCI|Compliance"
+          value       = "pci|compliance"
       }
     }
 }
@@ -87,7 +87,7 @@ resource "nsxt_policy_group" "ProdNonPCI" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "NonPCI|Compliance"
+          value       = "nonpci|compliance"
       }
     }
 }
