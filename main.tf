@@ -14,7 +14,7 @@ resource "nsxt_policy_group" "Sandbox" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "sandbox|Environment"
+          value       = "sandbox|environment"
       }
     }
 }
@@ -27,7 +27,7 @@ resource "nsxt_policy_group" "TestPCI" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "test|Environment"
+          value       = "test|environment"
       }
       condition {
           key         = "Tag"
@@ -45,7 +45,7 @@ resource "nsxt_policy_group" "TestNonPCI" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "test|Environment"
+          value       = "test|environment"
       }
       condition {
           key         = "Tag"
@@ -63,7 +63,7 @@ resource "nsxt_policy_group" "ProdPCI" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "Prod|Environment"
+          value       = "Prod|environment"
       }
       condition {
           key         = "Tag"
@@ -81,7 +81,7 @@ resource "nsxt_policy_group" "ProdNonPCI" {
           key         = "Tag"
           member_type = "SegmentPort"
           operator    = "EQUALS"
-          value       = "Prod|Environment"
+          value       = "Prod|environment"
       }
       condition {
           key         = "Tag"
