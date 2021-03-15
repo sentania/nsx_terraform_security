@@ -5,13 +5,16 @@ deleteDir()
       stage ('Checkout Build Code') {
          checkout scm
        }
+      stage ('Download Terraform') {
+        sh 'wget https://releases.hashicorp.com/terraform/0.13.6/terraform_0.13.6_linux_amd64.zip'
+        sh 'unzip terraform_0.13.6_linux_amd64.zip'
 
         withCredentials([usernamePassword(credentialsId: 'nsxCredentials',
         usernameVariable: 'NSXUSERNAME', passwordVariable: 'NSXPASSWORD')]) {
         stage ('Execute Terraform Template') {
-        sh '/usr/local/bin/terraform.13.4 init'
-        sh '/usr/local/bin/terraform.13.4 providers'
-        sh '/usr/local/bin/terraform.13.4 apply -state="/var/lib/jenkins/terraform/cloud_security/cloud_security.tfstate" -auto-approve -var nsxIP="172.24.0.10" -var nsxUser="$NSXUSERNAME" -var nsxPassword="$NSXPASSWORD"' 
+        sh 'terraform init'
+        sh 'terraform providers'
+        sh 'terraform apply -state="/var/lib/jenkins/terraform/cloud_security/cloud_security.tfstate" -auto-approve -var nsxIP="172.24.0.10" -var nsxUser="$NSXUSERNAME" -var nsxPassword="$NSXPASSWORD"' 
         }
     }
 }
