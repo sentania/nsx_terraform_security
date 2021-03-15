@@ -12,9 +12,9 @@ deleteDir()
         withCredentials([usernamePassword(credentialsId: 'nsxCredentials',
         usernameVariable: 'NSXUSERNAME', passwordVariable: 'NSXPASSWORD')]) {
         stage ('Execute Terraform Template') {
-        sh 'terraform init'
-        sh 'terraform providers'
-        sh 'terraform apply -state="/var/lib/jenkins/terraform/cloud_security/cloud_security.tfstate" -auto-approve -var nsxIP="172.24.0.10" -var nsxUser="$NSXUSERNAME" -var nsxPassword="$NSXPASSWORD"' 
+        sh './terraform init'
+        sh './terraform providers'
+        sh './terraform apply -state="/var/lib/jenkins/terraform/cloud_security/cloud_security.tfstate" -auto-approve -var nsxIP="172.24.0.10" -var nsxUser="$NSXUSERNAME" -var nsxPassword="$NSXPASSWORD"' 
         }
     }
 }
