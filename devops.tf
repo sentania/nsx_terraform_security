@@ -1,34 +1,3 @@
-####Allow RDP
-resource "nsxt_policy_group" "AllowRDP" {
-  display_name = "Allow RDP"
-  description  = "Allow RDP Group provisioned by Terraform"
-  criteria {
-      condition {
-          key         = "Tag"
-          member_type = "SegmentPort"
-          operator    = "EQUALS"
-          value       = "AllowRDP|Role"
-      }
-    }
-    tag {
-        scope = "AllowRDP"
-        tag   = "Role"
-    }
-}
-
-resource "nsxt_policy_service" "RDPService" {
-  description  = "RDP Serivces provisioned by Terraform"
-  display_name = "RDP Services"
-
-  l4_port_set_entry {
-    display_name      = "RDP Server Services"
-    description       = "TCP port 3389"
-    protocol          = "TCP"
-    destination_ports = [ "3389" ]
-  }
-}
-
-###END RDP Delcaration
 resource "nsxt_policy_group" "AllowSSH" {
   display_name = "Allow SSH"
   description  = "Allow SSH Group provisioned by Terraform"
@@ -223,14 +192,5 @@ resource "nsxt_policy_security_policy" "PrivateCloudPolicies" {
     services = [nsxt_policy_service.SSHService.path]
     destination_groups = [nsxt_policy_group.AllowSSH.path]
     scope = [nsxt_policy_group.AllowSSH.path]
-  }
-    rule {
-    display_name = "RDP Traffic"
-    description  = ""
-    action       = "DROP"
-    ip_version  = "IPV4"
-    services = [nsxt_policy_service.RDPService.path]
-    destination_groups = [nsxt_policy_group.AllowRDP.path]
-    scope = [nsxt_policy_group.AllowRDP.path]
   }
 }
