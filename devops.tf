@@ -181,9 +181,23 @@ resource "nsxt_policy_service" "SSHService" {
 }
 
 resource "nsxt_policy_security_policy" "PrivateCloudPolicies" {
-  description  = "Private Cloud Blueprint Policies Section provisioned by Terraform"
-  display_name = "Private Cloud Blueprint Policies"
+  description  = "Private Cloud Devops Policies Section provisioned by Terraform"
+  display_name = "Private Cloud Devops Policies"
   category = "Application"
+  depends_on = [
+    nsxt_policy_service.SSHService,
+    nsxt_policy_service.MySQLServices,
+    nsxt_policy_service.MSSQLServices,
+    nsxt_policy_service.WebServerServices,
+    nsxt_policy_service.RDPService,
+    nsxt_policy_group.AllowRDP,
+    nsxt_policy_group.AllowSSH,
+    nsxt_policy_group.MySQLClients,
+    nsxt_policy_group.MySQLServers,
+    nsxt_policy_group.WebServers,
+    nsxt_policy_group.MSSQLServers,
+    nsxt_policy_group.MSSQLClients,
+  ]
   rule {
     display_name = "Web Traffic"
     description  = ""
