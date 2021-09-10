@@ -187,20 +187,7 @@ resource "nsxt_policy_security_policy" "PrivateCloudPolicies" {
   lifecycle {
     create_before_destroy = true
   }
-  depends_on = [                                   ####The NSX T provider/TF interaction does not properly create a depenency map - so we need to define explicit dependencies to aid on
-    nsxt_policy_service.SSHService,
-    nsxt_policy_service.MySQLServices,
-    nsxt_policy_service.MSSQLServices,
-    nsxt_policy_service.WebServerServices,
-    #nsxt_policy_service.RDPService,
-    #nsxt_policy_group.AllowRDP,
-    nsxt_policy_group.AllowSSH,
-    nsxt_policy_group.MySQLClients,
-    nsxt_policy_group.MySQLServers,
-    nsxt_policy_group.WebServers,
-    nsxt_policy_group.MSSQLServers,
-    nsxt_policy_group.MSSQLClients,
-  ]
+
   rule {
     display_name = "Web Traffic"
     description  = ""
@@ -241,13 +228,13 @@ resource "nsxt_policy_security_policy" "PrivateCloudPolicies" {
     destination_groups = [nsxt_policy_group.AllowSSH.path]
     scope = [nsxt_policy_group.AllowSSH.path]
   }
-   # rule {
-   # display_name = "RDP Traffic"
-   # description  = ""
-   # action       = "DROP"
-   # ip_version  = "IPV4"
-   # services = [nsxt_policy_service.RDPService.path]
-   # destination_groups = [nsxt_policy_group.AllowRDP.path]
-   # scope = [nsxt_policy_group.AllowRDP.path]
-  #}
+    rule {
+    display_name = "RDP Traffic"
+    description  = ""
+    action       = "DROP"
+    ip_version  = "IPV4"
+    services = [nsxt_policy_service.RDPService.path]
+    destination_groups = [nsxt_policy_group.AllowRDP.path]
+    scope = [nsxt_policy_group.AllowRDP.path]
+  }
 }
