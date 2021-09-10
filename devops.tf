@@ -1,3 +1,34 @@
+####Allow RDP
+resource "nsxt_policy_group" "AllowRDP" {
+  display_name = "Allow RDP"
+  description  = "Allow RDP Group provisioned by Terraform"
+  criteria {
+      condition {
+          key         = "Tag"
+          member_type = "SegmentPort"
+          operator    = "EQUALS"
+          value       = "AllowRDP|Role"
+      }
+    }
+    tag {
+        scope = "AllowRDP"
+        tag   = "Role"
+    }
+}
+
+resource "nsxt_policy_service" "RDPService" {
+  description  = "RDP Serivces provisioned by Terraform"
+  display_name = "RDP Services"
+
+  l4_port_set_entry {
+    display_name      = "RDP Server Services"
+    description       = "TCP port 3389"
+    protocol          = "TCP"
+    destination_ports = [ "3389" ]
+  }
+}
+
+###END RDP Delcaration
 resource "nsxt_policy_group" "AllowSSH" {
   display_name = "Allow SSH"
   description  = "Allow SSH Group provisioned by Terraform"
@@ -153,11 +184,13 @@ resource "nsxt_policy_security_policy" "PrivateCloudPolicies" {
   description  = "Private Cloud Devops Policies Section provisioned by Terraform"
   display_name = "Private Cloud Devops Policies"
   category = "Application"
-  depends_on = [                                   ####The NSX T provider/TF interaction does not properly create a depenency map - so we need to define explicit dependencies to aid on cleanup.
+  depends_on = [                                   ####The NSX T provider/TF interaction does not properly create a depenency map - so we need to define explicit dependencies to aid on
     nsxt_policy_service.SSHService,
     nsxt_policy_service.MySQLServices,
     nsxt_policy_service.MSSQLServices,
     nsxt_policy_service.WebServerServices,
+    nsxt_policy_service.RDPService,
+    nsxt_policy_group.AllowRDP,
     nsxt_policy_group.AllowSSH,
     nsxt_policy_group.MySQLClients,
     nsxt_policy_group.MySQLServers,
@@ -205,5 +238,13 @@ resource "nsxt_policy_security_policy" "PrivateCloudPolicies" {
     destination_groups = [nsxt_policy_group.AllowSSH.path]
     scope = [nsxt_policy_group.AllowSSH.path]
   }
-
+    rule {
+    display_name = "RDP Traffic"
+    description  = ""
+    action       = "DROP"
+    ip_version  = "IPV4"
+    services = [nsxt_policy_service.RDPService.path]
+    destination_groups = [nsxt_policy_group.AllowRDP.path]
+    scope = [nsxt_policy_group.AllowRDP.path]
+  }
 }
