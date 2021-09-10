@@ -184,6 +184,9 @@ resource "nsxt_policy_security_policy" "PrivateCloudPolicies" {
   description  = "Private Cloud Devops Policies Section provisioned by Terraform"
   display_name = "Private Cloud Devops Policies"
   category = "Application"
+  lifecycle {
+    create_before_destroy = true
+  }
   depends_on = [                                   ####The NSX T provider/TF interaction does not properly create a depenency map - so we need to define explicit dependencies to aid on
     nsxt_policy_service.SSHService,
     nsxt_policy_service.MySQLServices,

@@ -10,7 +10,6 @@ resource "nsxt_policy_group" "Sandbox" {
       }
     }
 }
-
 resource "nsxt_policy_group" "TestPCI" {
   display_name = "Test PCI"
   description  = "Test PCI Group provisioned by Terraform"
