@@ -205,13 +205,5 @@ resource "nsxt_policy_security_policy" "PrivateCloudPolicies" {
     destination_groups = [nsxt_policy_group.AllowSSH.path]
     scope = [nsxt_policy_group.AllowSSH.path]
   }
-    rule {
-    display_name = "RDP Traffic"
-    description  = ""
-    action       = "DROP"
-    ip_version  = "IPV4"
-    services = [nsxt_policy_service.RDPService.path]
-    destination_groups = [nsxt_policy_group.AllowRDP.path]
-    scope = [nsxt_policy_group.AllowRDP.path]
-  }
+
 }
