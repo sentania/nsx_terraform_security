@@ -91,6 +91,17 @@ resource "nsxt_policy_group" "PrivateCloud" {
       member_paths = [nsxt_policy_group.Sandbox.path,nsxt_policy_group.ProdPCI.path,nsxt_policy_group.ProdNonPCI.path, nsxt_policy_group.TestPCI.path, nsxt_policy_group.TestNonPCI.path ]
     }
   }
+  conjunction {
+    operator = "OR"
+  }
+  criteria {
+    condition {
+      key         = "Tag"
+      member_type = "SegmentPort"
+      operator    = "EQUALS"
+      value       = "pc|env"
+    }
+
 }
 
 resource "nsxt_policy_group" "SharedServices" {
