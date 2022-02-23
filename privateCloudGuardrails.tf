@@ -101,6 +101,7 @@ resource "nsxt_policy_group" "PrivateCloud" {
       operator    = "EQUALS"
       value       = "pc|env"
     }
+  }
 
 }
 
